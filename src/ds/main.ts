@@ -27,7 +27,10 @@ list_string.RemoveFromFront();//8
 list_string.AddToLast("9");//8,9
 list_string.AddToLast("10");//8,9,10
 list_string.AddToLast("11");//8,9,10,11
-list_string.AddToLast("12");//8,9,10,11
-console.log(list_string);
-list_string.RemoveFirstOccurrence("8");
-console.log(list_string);
+list_string.AddToLast("12");//8,9,10,11,12
+console.log(list_string.printList());
+list_string.RemoveFirstOccurrence("8");//9,10,11,12
+console.log(list_string.printList());
+
+let list_string_1 = new LinkedList<string>();
+console.log(list_string_1.printList());

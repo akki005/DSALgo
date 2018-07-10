@@ -19,51 +19,51 @@ class LinkedList < T > {
      * Getter Head
      * @return {Node < T > }
      */
-	public get Head(): Node < T >  {
-		return this._Head;
-	}
+    public get Head(): Node < T > {
+        return this._Head;
+    }
 
     /**
      * Getter Tail
      * @return {Node < T > }
      */
-	public get Tail(): Node < T >  {
-		return this._Tail;
-	}
+    public get Tail(): Node < T > {
+        return this._Tail;
+    }
 
     /**
      * Getter count
      * @return {number}
      */
-	public get count(): number {
-		return this._count;
-	}
+    public get count(): number {
+        return this._count;
+    }
 
     /**
      * Setter Head
      * @param {Node < T > } value
      */
-	public set Head(value: Node < T > ) {
-		this._Head = value;
-	}
+    public set Head(value: Node < T > ) {
+        this._Head = value;
+    }
 
     /**
      * Setter Tail
      * @param {Node < T > } value
      */
-	public set Tail(value: Node < T > ) {
-		this._Tail = value;
-	}
+    public set Tail(value: Node < T > ) {
+        this._Tail = value;
+    }
 
     /**
      * Setter count
      * @param {number} value
      */
-	public set count(value: number) {
-		this._count = value;
-	}
+    public set count(value: number) {
+        this._count = value;
+    }
 
-    
+
     public AddToStart(value: T): void {
 
         let new_node = new Node(value);
@@ -126,15 +126,15 @@ class LinkedList < T > {
         let current_node: Node < T >= this.Head;
         let previous_node: Node < T >= null;
 
-        while (current_node!==null){
-            if(current_node.value == value){
-                if(previous_node!==null){
+        while (current_node !== null) {
+            if (current_node.value == value) {
+                if (previous_node !== null) {
                     previous_node.next = current_node.next;
-                    if(!current_node.next){
-                        this.Tail=previous_node;
+                    if (!current_node.next) {
+                        this.Tail = previous_node;
                     }
                     this.count--;
-                }else{
+                } else {
                     this.RemoveFromFront()
                 }
                 return;
@@ -142,6 +142,22 @@ class LinkedList < T > {
             previous_node = current_node;
             current_node = current_node.next;
         }
+    }
+
+    public printList(): string {
+        
+        if (this.count != 0) {
+            let current_node: Node < T >= this.Head;
+            let list_as_string: string = "";
+            while (current_node != null) {
+                list_as_string = list_as_string + " " + current_node.value;
+                current_node = current_node.next;
+            }
+            return list_as_string;
+        } else {
+            return "List is empty"
+        }
+
     }
 }
 
