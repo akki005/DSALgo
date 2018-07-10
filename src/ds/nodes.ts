@@ -1,46 +1,44 @@
 class Node < T > {
-    private value: T;
-    private next: Node < T > ;
+    private _value: T;
+    private _next: Node < T > ;
 
-    constructor(value: T = null, next: Node < T >= null) {
-        this.value = value;
-        this.next = next;
+    constructor(value: T, next: Node < T >= null) {
+        this._value = value;
+        this._next = next;
     }
 
 
     /**
-     * Getter $value
+     * Getter value
      * @return {T}
      */
-    public get $value(): T {
-        return this.value;
-    }
+	public get value(): T {
+		return this._value;
+	}
 
     /**
-     * Setter $value
-     * @param {T} value
-     */
-    public set $value(value: T) {
-        this.value = value;
-    }
-
-    /**
-     * Getter $next
+     * Getter next
      * @return {Node < T > }
      */
-    public get $next(): Node < T > {
-        return this.next;
-    }
+	public get next(): Node < T >  {
+		return this._next;
+	}
 
     /**
-     * Setter $next
+     * Setter value
+     * @param {T} value
+     */
+	public set value(value: T) {
+		this._value = value;
+	}
+
+    /**
+     * Setter next
      * @param {Node < T > } value
      */
-    public set $next(value: Node < T > ) {
-        this.next = value;
-    }
-
-
+	public set next(value: Node < T > ) {
+		this._next = value;
+	}
 }
 
 export {

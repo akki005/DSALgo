@@ -4,60 +4,66 @@ import {
 
 
 class LinkedList < T > {
-    private Head: Node < T > ;
-    private Tail: Node < T > ;
-    private count: number;
+    private _Head: Node < T > ;
+    private _Tail: Node < T > ;
+    private _count: number;
 
-    constructor(head: Node < T >=null, tail: Node < T >=null) {
-        this.Head=head;
-        this.Tail=tail;
-        this.count=0;
+    constructor(head: Node < T >= null, tail: Node < T >= null) {
+        this._Head = head;
+        this._Tail = tail;
+        this._count = 0;
     }
 
+
     /**
-     * Getter $Count
-     * @readonly
+     * Getter Head
+     * @return {Node < T > }
+     */
+	public get Head(): Node < T >  {
+		return this._Head;
+	}
+
+    /**
+     * Getter Tail
+     * @return {Node < T > }
+     */
+	public get Tail(): Node < T >  {
+		return this._Tail;
+	}
+
+    /**
+     * Getter count
      * @return {number}
-     * @memberof LinkedList
      */
-    public get $Count():number{
-        return this.count;
-    }
-
+	public get count(): number {
+		return this._count;
+	}
 
     /**
-     * Getter $Head
-     * @return {Node < T > }
-     */
-    public get $Head(): Node < T > {
-        return this.Head;
-    }
-
-    /**
-     * Setter $Head
+     * Setter Head
      * @param {Node < T > } value
      */
-    public set $Head(value: Node < T > ) {
-        this.Head = value;
-    }
+	public set Head(value: Node < T > ) {
+		this._Head = value;
+	}
 
     /**
-     * Getter $Tail
-     * @return {Node < T > }
-     */
-    public get $Tail(): Node < T > {
-        return this.Tail;
-    }
-
-    /**
-     * Setter $Tail
+     * Setter Tail
      * @param {Node < T > } value
      */
-    public set $Tail(value: Node < T > ) {
-        this.Tail = value;
-    }
+	public set Tail(value: Node < T > ) {
+		this._Tail = value;
+	}
 
+    /**
+     * Setter count
+     * @param {number} value
+     */
+	public set count(value: number) {
+		this._count = value;
+	}
 
+    
     public AddToStart(value: T): void {
 
         let new_node = new Node(value);
@@ -65,7 +71,7 @@ class LinkedList < T > {
         let temp: Node < T > = this.Head;
 
         this.Head = new_node;
-        this.Head.$next = temp;
+        this.Head.next = temp;
 
         this.count++;
 
@@ -74,36 +80,68 @@ class LinkedList < T > {
         }
     }
 
-    public AddToLast(value: T):void{
+    public AddToLast(value: T): void {
 
         let new_node = new Node(value);
-        
-        if(this.count===0){
-            this.Head=new_node;
-        }else{
-            this.Tail.$next=new_node;
+
+        if (this.count === 0) {
+            this.Head = new_node;
+        } else {
+            this.Tail.next = new_node;
         }
-        this.Tail=new_node;
+        this.Tail = new_node;
         this.count++;
     }
 
-    public RemoveFromLast():void
-    {
-        if(this.count!==0){
-            if(this.count===1){
-                this.Head=null;
-                this.Tail=null
-            }else{
-                let current_node= this.Head;
-                while(current_node.$next!==this.Tail){
-                    current_node= current_node.$next;
+    public RemoveFromLast(): void {
+        if (this.count !== 0) {
+            if (this.count === 1) {
+                this.Head = null;
+                this.Tail = null
+            } else {
+                let current_node: Node < T >= this.Head;
+                while (current_node.next !== this.Tail) {
+                    current_node = current_node.next;
                 }
-                current_node.$next=null;
-                this.Tail=current_node;
+                current_node.next = null;
+                this.Tail = current_node;
             }
             this.count--;
         }
-       
+
+    }
+    public RemoveFromFront(): void {
+        if (this.count !== 0) {
+            this.Head = this.Head.next;
+            this.count--;
+            if (this.count === 0) {
+                this.Tail = null;
+            }
+        }
+
+    }
+
+    public RemoveFirstOccurrence(value: T): void {
+
+        let current_node: Node < T >= this.Head;
+        let previous_node: Node < T >= null;
+
+        while (current_node!==null){
+            if(current_node.value == value){
+                if(previous_node!==null){
+                    previous_node.next = current_node.next;
+                    if(!current_node.next){
+                        this.Tail=previous_node;
+                    }
+                    this.count--;
+                }else{
+                    this.RemoveFromFront()
+                }
+                return;
+            }
+            previous_node = current_node;
+            current_node = current_node.next;
+        }
     }
 }
 
