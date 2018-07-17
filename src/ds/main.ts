@@ -1,4 +1,5 @@
 import {LinkedList} from './LinkedList/singlyLinkedList';
+import {Node} from './nodes';
 let list = new LinkedList<number>();
 list.AddToStart(4);//4
 list.AddToStart(5);//5,4
@@ -31,6 +32,17 @@ list_string.AddToLast("12");//8,9,10,11,12
 console.log(list_string.printList());
 list_string.RemoveFirstOccurrence("8");//9,10,11,12
 console.log(list_string.printList());
+console.log(list_string.next());
+console.log(list_string.next());
+console.log(list_string.next());
+console.log(list_string.next());
+console.log(list_string.next());
+
+for(const item of list_string.values()){
+    console.log(item);
+}
+let item:IterableIterator<string> =list_string.values();
+console.log(item.next());
 
 let list_string_1 = new LinkedList<string>();
 console.log(list_string_1.printList());

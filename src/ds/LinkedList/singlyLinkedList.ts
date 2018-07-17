@@ -3,10 +3,11 @@ import {
 } from "../../ds/nodes"
 
 
-class LinkedList < T > {
+class LinkedList < T > implements Iterator<T>{
     private _Head: Node < T > ;
     private _Tail: Node < T > ;
     private _count: number;
+    private _iterator_pointer: Node < T > ;
 
     constructor(head: Node < T >= null, tail: Node < T >= null) {
         this._Head = head;
@@ -44,6 +45,7 @@ class LinkedList < T > {
      * @param {Node < T > } value
      */
     public set Head(value: Node < T > ) {
+        this._iterator_pointer = value;
         this._Head = value;
     }
 
@@ -145,7 +147,7 @@ class LinkedList < T > {
     }
 
     public printList(): string {
-        
+
         if (this.count != 0) {
             let current_node: Node < T >= this.Head;
             let list_as_string: string = "";
@@ -158,6 +160,34 @@ class LinkedList < T > {
             return "List is empty"
         }
 
+    }
+
+    /**iterator 
+     * as it implement iterator interface it must implement next function and that next function must return IteratorResult type
+    */
+    public next(): IteratorResult < T > {
+        if (this._iterator_pointer !== null) {
+            let current_node: Node < T > = this._iterator_pointer;
+            this._iterator_pointer = this._iterator_pointer.next;
+            return {
+                done: false,
+                value: current_node.value
+            }
+        } else {
+            return {
+                done: true,
+                value: undefined
+            }
+        }
+    }
+
+    /**iterable and iterator combined*/
+    public * values(): IterableIterator < T > {
+        let current_node: Node < T >= this._Head;
+        while (current_node !== null) {
+            yield current_node.value;
+            current_node = current_node.next;
+        }
     }
 }
 
